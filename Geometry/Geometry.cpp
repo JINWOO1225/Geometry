@@ -44,7 +44,9 @@ private:
 	// 물론 배열의 크기는 생성자에서 초기화 하고 충분히
 	// 크게 잡도록 합시다 (점 100 개 정도?)
 public:
-	Geometry();	
+	Geometry();	//생성자
+
+	Point &Get_Point(const int index) { return point_array[index]; }
 	
 	void Add_Point(Point &Point);
 
@@ -81,16 +83,16 @@ void Geometry::show_Point()
 
 double Geometry::Distance(Point &point1, Point &point2)
 {
-	return sqrt(pow((point1.getx - point2.getx), 2) + pow((point1.gety - point2.gety), 2));
+	return sqrt(pow((point1.getx() - point2.getx()), 2) + pow((point1.gety() - point2.gety()), 2));
 }
 
 void Geometry::Print_Distance()		//각 점과의 거리를 표시
 {
 	for (int i = index; i > 0; i--)
 	{
-		for (int j = i - 1; i > 0; j--)
+		for (int j = i; j > 0; j--)
 		{
-
+			cout << i <<":"<< j <<":"<< Distance(Get_Point(i),Get_Point(j)) << endl;
 		}
 	}
 }
@@ -122,6 +124,11 @@ int main()
 			case '2':
 			{
 				geo.show_Point();
+				break;
+			}
+			case '3':
+			{
+				geo.Print_Distance();
 				break;
 			}
 			default:
