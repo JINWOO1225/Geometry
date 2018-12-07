@@ -20,12 +20,15 @@ public:
 		x = _x;
 		y = _y;
 	}
-	void show()
-	{
-		cout << "The point x : " << x << "y : " << y << endl;
-	}
+	void show();
+	
 
 };
+
+void Point::show()
+{
+	cout << "The point x : " << x << "\ty : " << y << endl;
+}
 
 class Geometry {
 private:
@@ -34,7 +37,7 @@ private:
 	Point *point_array;
 
 public:
-	Geometry(Point *point_list);
+	Geometry();
 
 	void Add_Point(Point &Point);
 
@@ -46,7 +49,7 @@ public:
 
 };
 
-Geometry::Geometry(Point *point_list)
+Geometry::Geometry()
 {
 	point_array = new Point[100];
 }
@@ -60,10 +63,10 @@ void Geometry::Add_Point(Point &point)
 
 void Geometry::show_Point()
 {
-	cout << "The Points you entered is :" << index << endl;
+	cout << "The Quantity of your Points is :" << index << endl;
 	for (int i = 0; i < index; i++)
 	{
-		point_array[i].show;
+		point_array[i].show();
 	}
 }
 
@@ -71,8 +74,34 @@ void Geometry::show_Point()
 int main()
 {
 	Point point;
+	Geometry geo = Geometry();
+	int i;
 	for (;;)
 	{
+		cout << "1.Add point\n" << "2.Show point\n" << endl;
+		cin >> i;
+		switch (i)
+		{
+			case 1:
+			{
+				int x, y;
+				cout << "x :";
+				cin >> x;
+				cout << "y :";
+				cin >> y;
+
+				point = Point(x, y);
+
+				geo.Add_Point(point);
+
+				break;
+			}
+			case 2:
+			{
+				geo.show_Point();
+				break;
+			}
+		}
 
 	}
 }
