@@ -81,13 +81,11 @@ void Geometry::show_Point()
 
 double Geometry::Distance(Point &point1, Point &point2)
 {
-	return sqrt(pow((point1.getx - point2.getx),2)+pow((point1.gety - point2.gety),2))
+	return sqrt(pow((point1.getx - point2.getx), 2) + pow((point1.gety - point2.gety), 2));
 }
 
 void Geometry::Print_Distance()		//각 점과의 거리를 표시
 {
-	double Distance;
-	int diff_x, diff_y;
 	for (int i = index; i > 0; i--)
 	{
 		for (int j = i - 1; i > 0; j--)
