@@ -88,9 +88,9 @@ double Geometry::Distance(Point &point1, Point &point2)
 
 void Geometry::Print_Distance()		//각 점과의 거리를 표시
 {
-	for (int i = index; i > 0; i--)
+	for (int i = index - 1; i >= 0; i--)
 	{
-		for (int j = i; j > 0; j--)
+		for (int j = i-1; j >= 0; j--)
 		{
 			cout << i <<":"<< j <<":"<< Distance(Get_Point(i),Get_Point(j)) << endl;
 		}
