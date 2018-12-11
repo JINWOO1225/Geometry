@@ -1,5 +1,5 @@
-﻿// Geometry.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
+// Geometry.cpp
+// https://modoocode.com/173
 
 #include "pch.h"
 #include <iostream>
@@ -37,7 +37,7 @@ void Point::show()
 
 class Geometry {
 private:
-	int index = 0;
+	int index;
 
 	Point *point_array;
 	// 현재 공간에 대한 점들의 정보를 담고 있는 배열
@@ -58,10 +58,12 @@ public:
 
 	void Print_Num_Meets();
 
+	int isitOneLine(Point &point1, Point &point2, Point &targetPoint);
 };
 
 Geometry::Geometry()
 {
+	index = 0;
 	point_array = new Point[100];
 }
 
@@ -96,6 +98,33 @@ void Geometry::Print_Distance()		//각 점과의 거리를 표시
 		}
 	}
 }
+// 모든 점들을 잇는 직선들 간의 교점의 수를 출력해주는 함수 입니다.
+// 참고적으로 임의의 두 점을 잇는 직선의 방정식을 f(x,y) = ax+by+c = 0 이라고 할 때 임의의 다른 두 점 (x1, y1) 과 (x2, y2) 가 f(x,y)=0 을 기준으로 서로 다른 부분에 있을 조건은 f(x1, y1) * f(x2, y2) <= 0 이면 됩니다.
+// 
+void Geometry::Print_Num_Meets() 
+{
+	int count = 0;
+	int *nodeArray = new int[index];
+	for(int i = index; i >= 0; i--)
+	{
+		for(int j = i - 1; j >= 0; j--)
+		{
+			for(int k = 0; k < index; k++)
+			{
+				cout << i << j << k;
+				isitOneLine(point_array[i],point_array[j],point_array[k]);
+			}
+		}
+	}
+}
+
+int Geometry::isitOneLine(Point &point1, Point &point2, Point &targetPoint)
+{
+
+	cout << "result is : "<< (((double)point1.gety() - (double)point2.gety())*((double)targetPoint.getx()-(double)point1.getx())/((double)targetPoint.gety()-(double)point1.gety())) << endl;
+
+
+}
 
 int main()
 {
@@ -104,7 +133,7 @@ int main()
 	char i;
 	for (;;)
 	{
-		cout << "1.Add point\n" << "2.Show point\n" << "3.Show Distance\n" << endl;
+		cout << "1.Add point\n" << "2.Show point\n" << "3.Show Distance\n"<< "4.Show Meeting Points\n" << endl;
 		cin >> i;
 		switch (i)
 		{
@@ -129,6 +158,12 @@ int main()
 			case '3':
 			{
 				geo.Print_Distance();
+				break;
+			}
+
+			case '4':
+			{
+				geo.Print_Num_Meets();
 				break;
 			}
 			default:
